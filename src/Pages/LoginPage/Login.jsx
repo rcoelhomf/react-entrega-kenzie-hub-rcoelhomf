@@ -12,7 +12,7 @@ import { StyledHeader, StyledMain } from './style'
 
 export const LoginPage = () => {
     const [eyeIcon, setEyeIcon] = useState(true)
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(loginSchema),
     })
     const navigate = useNavigate()
@@ -28,8 +28,6 @@ export const LoginPage = () => {
             }, 1000)
         } catch (error) {
             toast.error(error.response.data.message)
-        } finally {
-            reset()
         }
         
     }

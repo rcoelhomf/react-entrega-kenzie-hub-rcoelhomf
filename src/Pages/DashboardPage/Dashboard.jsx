@@ -22,7 +22,7 @@ export const DashboardPage = () => {
                 const { data } = await api.get('/profile') 
                 setUser({...data})
             } catch (error) {
-                
+                console.log(error)
             }finally {
                 setIsLoading(false)
             }

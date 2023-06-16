@@ -12,7 +12,7 @@ import { StyledHeader, StyledMain } from './style'
 
 export const RegisterPage = () => {
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(registerSchema)
     })
     const navigate = useNavigate()
