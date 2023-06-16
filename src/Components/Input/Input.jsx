@@ -1,13 +1,16 @@
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
+import { StyleHeadline } from '../../Styles/Typography'
+import { StyledDiv } from './style'
 
-export const Input = ({ label, id, register, marker, eyeIcon, setEyeIcon, ...rest }) => {
+export const Input = ({ label, register, marker, errors, eyeIcon, setEyeIcon, ...rest }) => {
     return(
-        <div>
-            <label htmlFor={id}>{label}</label>
-            <input id={id} {...rest} {...register} />
-            {marker ? <span onClick={() => setEyeIcon(!eyeIcon)}>
+        <StyledDiv>
+            <StyleHeadline>{label}</StyleHeadline>
+            <input {...rest} {...register} />
+            {marker ? <span className='eyeIcon' onClick={() => setEyeIcon(!eyeIcon)}>
                 {eyeIcon ? <BsEye color='var(--color-grey-1)' /> : <BsEyeSlash color='var(--color-grey-1)' />}
             </span> : null}
-        </div>
+            {errors ? <StyleHeadline font={'var(--color-negative)'}>{errors.message}</StyleHeadline> : null}
+        </StyledDiv>
     )
 }

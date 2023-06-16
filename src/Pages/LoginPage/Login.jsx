@@ -4,9 +4,11 @@ import { useForm } from 'react-hook-form'
 import logo from '../../assets/Logo.png'
 import { useState } from 'react'
 import { Input } from '../../Components/Input/Input'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { loginSchema } from './LoginSchema'
-import { StyleHeadlineBold, StyleHeadlineItalic } from '../../Styles/Typography'
+import { StyleHeadlineBold, StyleTitle1 } from '../../Styles/Typography'
+import { toast } from 'react-toastify'
+import { StyledHeader, StyledMain } from './style'
 
 export const LoginPage = () => {
     const [eyeIcon, setEyeIcon] = useState(true)
@@ -19,9 +21,13 @@ export const LoginPage = () => {
         try {
             const { data } = await api.post('/sessions', formData)
             localStorage.setItem('@KenzieHub:Token', data.token)
-            navigate('/dashboard')
+            localStorage.setItem('@KenzieHub:UserId', data.user.id)
+            toast.success('Login realizado')
+            setTimeout(() => {
+                navigate('/dashboard')
+            }, 1000)
         } catch (error) {
-            console.log(error)
+            toast.error(error.response.data.message)
         } finally {
             reset()
         }
@@ -30,34 +36,36 @@ export const LoginPage = () => {
     
     return(
         <>
-            <header>
+            <StyledHeader>
                 <img src={logo} alt='Logo da KenzieHub escrito em rosa' />
-            </header>
-            <form onSubmit={handleSubmit(submit)} noValidate>
-                <h1>Login</h1>
-                <Input 
-                label={'Email'} 
-                id={'Email'} 
-                register={register('email')} 
-                type='email'
-                placeholder='Digite seu E-mail'                
-                />
-                {errors.email ? <StyleHeadlineItalic font={'var(--color-negative)'}>{errors.email.message}</StyleHeadlineItalic> : null}
-                <Input 
-                label={'Senha'} 
-                id={'Senha'} 
-                marker={true}
-                eyeIcon={eyeIcon}
-                register={register('password')}
-                type={eyeIcon ? 'password' : 'text'}
-                placeholder='Digite sua senha' 
-                setEyeIcon={setEyeIcon}
-                />
-                {errors.password ? <StyleHeadlineItalic font={'var(--color-negative)'}>{errors.password.message}</StyleHeadlineItalic> : null}
-                <button type='submit'>Entrar</button>
-            </form>
-            <StyleHeadlineBold font={'var(--color-grey-1)'}>Ainda não possui uma conta?</StyleHeadlineBold>
-            <button onClick={() => navigate('/register')}>Cadastrar-se</button>
+            </StyledHeader>
+            <StyledMain>
+                <form onSubmit={handleSubmit(submit)} noValidate>
+                    <StyleTitle1>Login</StyleTitle1>
+                    <Input 
+                        label={'Email'} 
+                        register={register('email')} 
+                        type='email'
+                        placeholder='Digite seu E-mail'
+                        errors={errors.email}                
+                    />
+                    <Input 
+                        label={'Senha'} 
+                        marker={true}
+                        eyeIcon={eyeIcon}
+                        register={register('password')}
+                        type={eyeIcon ? 'password' : 'text'}
+                        placeholder='Digite sua senha' 
+                        setEyeIcon={setEyeIcon}
+                        errors={errors.password}
+                    />
+                    <button className='pinkBtn' type='submit'>Entrar</button>
+                    <StyleHeadlineBold font={'var(--color-grey-1)'}>Ainda não possui uma conta?</StyleHeadlineBold>
+                    <Link className='outsideBtn' to={'/register'}>
+                        <button className='greyBtn'>Cadastrar-se</button>
+                    </Link>
+                </form>
+            </StyledMain>
         </>
     )
 }

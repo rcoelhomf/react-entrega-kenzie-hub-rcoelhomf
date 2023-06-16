@@ -16,5 +16,6 @@ export const GlobalStyle = createGlobalStyle`
 
     body {
         background-color: var(--color-grey-4);
+		overflow: overlay;
     }
 `
