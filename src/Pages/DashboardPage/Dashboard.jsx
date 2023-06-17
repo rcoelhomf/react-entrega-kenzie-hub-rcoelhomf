@@ -9,6 +9,12 @@ import { LoadDiv, StyledDiv, StyledHeader, StyledSection } from './style'
 
 export const DashboardPage = () => {
 
+    const token = localStorage.getItem('@KenzieHub:Token')
+    const config = {
+        headers: {
+            Authorization: `Barear ${token}`
+        }
+    }
     const [user, setUser] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     
@@ -18,8 +24,9 @@ export const DashboardPage = () => {
         
         const loadData = async () => {
             try {
-                const resp = await api.get('/profile')
-                setUser(resp.data)
+                await api.get('/profile', config)
+                .then(resp => setUser(resp.data))
+                
             } catch (error) {
                 toast.error(error.responde.data.message)
             }finally {
@@ -28,6 +35,7 @@ export const DashboardPage = () => {
         }
         loadData()
     }, [])
+    
     return(
         <>
             <StyledSection>
