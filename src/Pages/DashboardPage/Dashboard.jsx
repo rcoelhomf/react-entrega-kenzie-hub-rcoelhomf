@@ -1,6 +1,6 @@
 import logo from '../../assets/Logo.png'
-import { useEffect, useState } from "react"
-import { api } from "../../Services/Api"
+import { useEffect, useState } from 'react'
+import { api } from '../../Services/Api'
 import { StyleHeadline, StyleHeadlineBold, StyleTitle1 } from '../../Styles/Typography'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'

@@ -1,5 +1,5 @@
-import { StyleHeadline } from "../../Styles/Typography"
-import { StyledSelect } from "./style"
+import { StyleHeadline } from '../../Styles/Typography'
+import { StyledSelect } from './style'
 
 export const Select = ({ children, label, register, errors }) => {
     return(

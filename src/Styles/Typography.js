@@ -1,8 +1,8 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components'
 
 export const StyleTitle1 = styled.h1`
     font-size: 1.125rem;
-    font-family: "Inter";
+    font-family: 'Inter';
     font-weight: 700;
     font-style: normal;
     line-height: 1.75rem;
@@ -13,7 +13,7 @@ export const StyleTitle1 = styled.h1`
 
 export const StyleTitle2 = styled.h2`
     font-size: 1rem;
-    font-family: "Inter";
+    font-family: 'Inter';
     font-weight: 700;
     font-style: normal;
     line-height: 1.625rem;
@@ -24,7 +24,7 @@ export const StyleTitle2 = styled.h2`
 
 export const StyleTitle3 = styled.h3`
     font-size: .875rem;
-    font-family: "Inter";
+    font-family: 'Inter';
     font-weight: 700;
     font-style: normal;
     line-height: 1.5rem;
@@ -35,7 +35,7 @@ export const StyleTitle3 = styled.h3`
 
 export const StyleHeadline = styled.p`
     font-size: .75rem;
-    font-family: "Inter";
+    font-family: 'Inter';
     font-weight: 400;
     font-style: normal;
     line-height: 1.375rem;
@@ -46,7 +46,7 @@ export const StyleHeadline = styled.p`
 
 export const StyleHeadlineBold = styled.p`
     font-size: .75rem;
-    font-family: "Inter";
+    font-family: 'Inter';
     font-weight: 700;
     font-style: normal;
     line-height: 1.125rem;
@@ -57,7 +57,7 @@ export const StyleHeadlineBold = styled.p`
 
 export const StyleHeadlineItalic = styled.p`
     font-size: .75rem;
-    font-family: "Inter";
+    font-family: 'Inter';
     font-weight: 400;
     font-style: italic;
     line-height: 1.125rem;
