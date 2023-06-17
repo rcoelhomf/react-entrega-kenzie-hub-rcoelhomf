@@ -2,14 +2,13 @@ import logo from '../../assets/Logo.png'
 import { useEffect, useState } from "react"
 import { api } from "../../Services/Api"
 import { StyleHeadline, StyleHeadlineBold, StyleTitle1 } from '../../Styles/Typography'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Puff from 'react-loading-icons/dist/esm/components/puff'
 import { LoadDiv, StyledDiv, StyledHeader, StyledSection } from './style'
 
 export const DashboardPage = () => {
 
-    const navigate = useNavigate()
     const [user, setUser] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     
@@ -19,8 +18,8 @@ export const DashboardPage = () => {
         
         const loadData = async () => {
             try {
-                const { data } = await api.get('/profile') 
-                setUser({...data})
+                const resp = await api.get('/profile')
+                setUser(resp.data)
             } catch (error) {
                 toast.error(error.responde.data.message)
             }finally {
