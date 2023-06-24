@@ -1,6 +1,6 @@
-import { useContext, useEffect } from "react"
-import { TechContext } from "../../Providers/TechProvider"
-import { BackGroundModal, ModalContainer } from "./Style"
+import { useContext, useEffect } from 'react'
+import { TechContext } from '../../Providers/TechProvider'
+import { BackGroundModal, ModalContainer } from './style'
 
 export const Modal = ({ children }) => {
 
