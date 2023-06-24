@@ -79,4 +79,78 @@ export const StyledDiv = styled.div`
     height: max-content;
     margin: 0 auto;
     padding: 40px 0;
+    gap: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+
+    .divHeader {
+        width: 100%;
+
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .plusBtn {
+        width: 32px;
+        height: 32px;
+
+        background-color: var(--color-grey-3);
+        border-radius: 4px;
+        color: var(--color-grey-0);
+        font-weight: 500;
+        font-size: 1.25rem;
+    
+        cursor: pointer;
+    }
+
+    .plusBtn:hover {
+        background-color: var(--color-grey-2);
+    }
+
+    .modalHeader {
+        width: 100%;
+        height: 45px;
+        padding: 0 20px;
+
+        background-color: var(--color-grey-2);
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .closeBtn {
+        background-color: transparent;
+        color: var(--color-grey-0);
+
+        cursor: pointer;
+    }
+
+    .addForm {
+        width: 100%;
+        height: max-content;
+        padding: 20px;
+        gap: 30px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .buttonAdd {
+        width: 100%;
+        height: 50px;
+
+        background-color: var(--color-color-primary);
+        border-radius: 4px;
+        color: var(--color-grey-0);
+
+        cursor: pointer;
+    }
+
+    .buttonAdd:hover {
+        background-color: var(--color-color-primary-50);
+    }
 `

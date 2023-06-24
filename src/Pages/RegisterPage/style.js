@@ -12,9 +12,14 @@ export const StyledHeader = styled.header`
     justify-content: space-between;
     align-items: end;
 
-    button {
+    .backBtn {
         width: 80px;
         height: 32px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
 
         background-color: var(--color-grey-3);
         color: var(--color-grey-0);
@@ -23,7 +28,7 @@ export const StyledHeader = styled.header`
         cursor: pointer;
     }
 
-    button:hover {
+    .backBtn:hover {
         background-color: var(--color-grey-2);
     }
 `

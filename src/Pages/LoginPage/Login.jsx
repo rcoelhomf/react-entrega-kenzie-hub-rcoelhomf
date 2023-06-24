@@ -1,36 +1,24 @@
-import { api } from '../../Services/Api'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import logo from '../../assets/Logo.png'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Input } from '../../Components/Input/Input'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { loginSchema } from './LoginSchema'
 import { StyleHeadlineBold, StyleTitle1 } from '../../Styles/Typography'
-import { toast } from 'react-toastify'
 import { StyledHeader, StyledMain } from './style'
+import { UserContext } from '../../Providers/UserProvider'
 
 export const LoginPage = () => {
+
+    const { submit } = useContext(UserContext)
+
     const [eyeIcon, setEyeIcon] = useState(true)
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(loginSchema),
     })
-    const navigate = useNavigate()
 
-    const submit = async (formData) => {
-        try {
-            const { data } = await api.post('/sessions', formData)
-            localStorage.setItem('@KenzieHub:Token', data.token)
-            localStorage.setItem('@KenzieHub:UserId', data.user.id)
-            toast.success('Login realizado')
-            setTimeout(() => {
-                navigate('/dashboard')
-            }, 1000)
-        } catch (error) {
-            toast.error(error.response.data.message)
-        }
-        
-    }
+
     
     return(
         <>
@@ -59,9 +47,7 @@ export const LoginPage = () => {
                     />
                     <button className='pinkBtn' type='submit'>Entrar</button>
                     <StyleHeadlineBold font={'var(--color-grey-1)'}>Ainda não possui uma conta?</StyleHeadlineBold>
-                    <Link className='outsideBtn' to={'/register'}>
-                        <button className='greyBtn'>Cadastrar-se</button>
-                    </Link>
+                    <Link className='greyBtn' to={'/register'}>Cadastrar-se</Link>
                 </form>
             </StyledMain>
         </>

@@ -54,6 +54,11 @@ export const StyledMain = styled.main`
         width: 100%;
         height: 40px;
 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+
         background-color: var(--color-grey-1);
         color: var(--color-grey-0);
         border-radius: 4px;

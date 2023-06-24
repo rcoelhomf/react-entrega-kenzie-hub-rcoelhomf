@@ -1,52 +1,31 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import logo from '../../assets/Logo.png'
 import { Input } from '../../Components/Input/Input'
 import { useForm } from 'react-hook-form'
 import { Select } from '../../Components/Select/Select'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { registerSchema } from './RegisterSchema'
-import { api } from '../../Services/Api'
-import { toast } from 'react-toastify'
 import { StyleHeadline, StyleTitle1 } from '../../Styles/Typography'
 import { StyledHeader, StyledMain } from './style'
+import { useContext } from 'react'
+import { UserContext } from '../../Providers/UserProvider'
 
 export const RegisterPage = () => {
+
+    const { registerSubmit } = useContext(UserContext)
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(registerSchema)
     })
-    const navigate = useNavigate()
-
-    const submit = async(formData) => {
-        const postData = {
-            name: formData.name,
-            email: formData.email,
-            password: formData.password,
-            bio: formData.bio,
-            contact: formData.contact,
-            course_module: formData.course_module,
-        }
-        try {
-            const { data } = await api.post('/users', postData)
-            toast.success('Cadastro realizado!')
-            setTimeout(() => {
-                navigate('/')
-            }, 1000)
-        } catch (error) {
-            toast.error(error.response.data.message)
-        }
-    }
 
     return(
         <>
             <StyledHeader>
                 <img src={logo} alt='Logo da KenzieHub em letras rosas' />
-                <Link to={'/'}>
-                    <button>Voltar</button>
-                </Link>
+                <Link className='backBtn' to={'/'}>Voltar</Link>
             </StyledHeader>
             <StyledMain>
-                <form onSubmit={handleSubmit(submit)} noValidate>
+                <form onSubmit={handleSubmit(registerSubmit)} noValidate>
                     <StyleTitle1>Crie sua conta</StyleTitle1>
                     <StyleHeadline font={'var(--color-grey-1)'}>Rapido e grátis, vamos nessa</StyleHeadline>
                     <Input
