@@ -11,54 +11,6 @@ export const TechProvider = ({ children }) => {
     const [ technology, setTechnology ] = useState(null)
     const [ handleModal, setHandleModal ] = useState(false)
 
-    const addSubmit = async (formData) => {
-
-        const token = localStorage.getItem('@KenzieHub:Token')
-        const config = {
-            headers: {
-                Authorization: `Barear ${token}`
-            }
-        }
-        console.log(formData)
-
-        try {
-            await api.post('/users/techs', formData, config)
-            await api.get('/profile', config)
-            .then(({ data }) => {
-                setTechs([...data.techs])
-            })
-            toast.success('Tecnologia adicionada') 
-        } catch (error) {
-            toast.error(error.response.data.message)
-        } finally {
-            setHandleModal(false)
-        }
-
-    }
-
-    const configSubmit = async (formData) => {
-
-        const token = localStorage.getItem('@KenzieHub:Token')
-        const config = {
-            headers: {
-                Authorization: `Barear ${token}`
-            }
-        }
-
-        try {
-            await api.put(`/users/techs/${technology}`, formData, config)
-            await api.get('/profile', config)
-            .then(({ data }) => {
-                setTechs([...data.techs])
-            })
-            toast.success('Tecnologia atualizada')
-        } catch (error) {
-            console.log(error)
-        } finally {
-            setTechnology(null)
-        }
-    }
-
     const deleteTech = async () => {
 
         const token = localStorage.getItem('@KenzieHub:Token')
@@ -89,10 +41,8 @@ export const TechProvider = ({ children }) => {
         value={{
           handleModal,
           setHandleModal,
-          addSubmit,
           technology,
           setTechnology,
-          configSubmit,
           deleteTech,
         }}
       >

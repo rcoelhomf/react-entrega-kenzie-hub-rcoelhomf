@@ -53,13 +53,13 @@ export const UserProvider = ({ children }) => {
             toast.success('Login realizado')
             navigate('/dashboard')
         } catch (error) {
-            toast.error(error.response.data.message)
+            toast.error('Usuário ou Senha incorretos')
         }
         
     }
 
     
-    const registerSubmit = async(formData) => {
+    const registerSubmit = async (formData) => {
         const postData = {
             name: formData.name,
             email: formData.email,

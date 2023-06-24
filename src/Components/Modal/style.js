@@ -1,4 +1,4 @@
-import { styled } from 'tyled-components'
+import { styled } from 'styled-components' 
 
 export const BackGroundModal = styled.div`
     position: fixed;

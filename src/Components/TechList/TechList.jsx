@@ -7,12 +7,14 @@ import { Input } from '../Input/Input'
 import { Select } from '../Select/Select'
 import { useForm } from 'react-hook-form'
 import { StyledContainer, StyledList } from './style'
+import { api } from '../../Services/Api'
+import { toast } from 'react-toastify'
 
 export const TechList = () => {
 
-    const { techs } = useContext(UserContext)
-    const { technology, setTechnology, configSubmit, deleteTech } = useContext(TechContext)
-    const { register, handleSubmit } = useForm()
+    const { techs, setTechs } = useContext(UserContext)
+    const { technology, setTechnology, deleteTech } = useContext(TechContext)
+    const { register, handleSubmit, reset } = useForm()
 
     
     const openListModal = (e) => {
@@ -22,6 +24,31 @@ export const TechList = () => {
     const closeListModal = (e) => {
         setTechnology(null)
     }
+
+    const configSubmit = async (formData) => {
+
+        const token = localStorage.getItem('@KenzieHub:Token')
+        const config = {
+            headers: {
+                Authorization: `Barear ${token}`
+            }
+        }
+
+        try {
+            await api.put(`/users/techs/${technology}`, formData, config)
+            await api.get('/profile', config)
+            .then(({ data }) => {
+                setTechs([...data.techs])
+            })
+            toast.success('Tecnologia atualizada')
+        } catch (error) {
+            console.log(error)
+        } finally {
+            reset()
+            setTechnology(null)
+        }
+    }
+
 
 
 

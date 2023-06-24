@@ -13,12 +13,13 @@ import { Select } from '../../Components/Select/Select'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { addTechSchema } from './AddTechSchema'
+import { api } from '../../Services/Api'
 
 export const DashboardPage = () => {
 
-   const { navigate, user, isLoading, loadUser, techs } = useContext(UserContext)
-   const { handleModal, setHandleModal, addSubmit } = useContext(TechContext)
-   const { register, handleSubmit, formState: { errors } } = useForm({
+   const { navigate, user, isLoading, loadUser, techs, setTechs } = useContext(UserContext)
+   const { handleModal, setHandleModal } = useContext(TechContext)
+   const { register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: zodResolver(addTechSchema),
    })
     
@@ -38,6 +39,32 @@ export const DashboardPage = () => {
     const closeModal = () => {
         setHandleModal(false)
     }
+
+    const addSubmit = async (formData) => {
+
+        const token = localStorage.getItem('@KenzieHub:Token')
+        const config = {
+            headers: {
+                Authorization: `Barear ${token}`
+            }
+        }
+
+        try {
+            await api.post('/users/techs', formData, config)
+            await api.get('/profile', config)
+            .then(({ data }) => {
+                setTechs([...data.techs])
+            })
+            toast.success('Tecnologia adicionada') 
+        } catch (error) {
+            toast.error(error)
+        } finally {
+            reset()
+            setHandleModal(false)
+        }
+
+    }
+
 
     
     return(
