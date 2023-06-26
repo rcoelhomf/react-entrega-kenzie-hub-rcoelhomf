@@ -79,10 +79,17 @@ export const UserProvider = ({ children }) => {
         }
     }
 
+    const handleLogOut = () => {
+        toast.success('LogOut realizado com sucesso')
+        localStorage.removeItem('@KenzieHub:Token')
+        localStorage.removeItem('@KenzieHub:UserId')
+        navigate('/')
+    }
+
 
     return (
       <UserContext.Provider
-        value={{ navigate, user, techs, setTechs, isLoading, loadUser, submit, registerSubmit }}
+        value={{ navigate, user, techs, setTechs, isLoading, loadUser, submit, registerSubmit, handleLogOut }}
       >
         {children}
       </UserContext.Provider>

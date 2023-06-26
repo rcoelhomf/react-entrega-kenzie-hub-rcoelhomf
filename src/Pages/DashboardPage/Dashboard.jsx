@@ -13,24 +13,16 @@ import { Select } from '../../Components/Select/Select'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { addTechSchema } from './AddTechSchema'
-import { api } from '../../Services/Api'
 
 export const DashboardPage = () => {
 
-   const { navigate, user, isLoading, loadUser, techs, setTechs } = useContext(UserContext)
-   const { handleModal, setHandleModal } = useContext(TechContext)
+   const { user, isLoading, loadUser, techs, handleLogOut } = useContext(UserContext)
+   const { handleModal, setHandleModal, addSubmit } = useContext(TechContext)
    const { register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: zodResolver(addTechSchema),
    })
     
     loadUser()
-
-    const handleLogOut = () => {
-        toast.success('LogOut realizado com sucesso')
-        localStorage.removeItem('@KenzieHub:Token')
-        localStorage.removeItem('@KenzieHub:UserId')
-        navigate('/')
-    }
 
     const openModal = () => {
         setHandleModal(true)
@@ -40,31 +32,10 @@ export const DashboardPage = () => {
         setHandleModal(false)
     }
 
-    const addSubmit = async (formData) => {
-
-        const token = localStorage.getItem('@KenzieHub:Token')
-        const config = {
-            headers: {
-                Authorization: `Barear ${token}`
-            }
-        }
-
-        try {
-            await api.post('/users/techs', formData, config)
-            await api.get('/profile', config)
-            .then(({ data }) => {
-                setTechs([...data.techs])
-            })
-            toast.success('Tecnologia adicionada') 
-        } catch (error) {
-            toast.error(error)
-        } finally {
-            reset()
-            setHandleModal(false)
-        }
-
+    const handleNewTechs = (formData) => {
+        addSubmit(formData)
+        reset()
     }
-
 
     
     return(
@@ -100,7 +71,7 @@ export const DashboardPage = () => {
                             <StyleTitle3>Cadastrar Tecnologia</StyleTitle3>
                             <button className='closeBtn' onClick={closeModal}>X</button>
                         </div>
-                        <form className='addForm' onSubmit={handleSubmit(addSubmit)}>
+                        <form className='addForm' onSubmit={handleSubmit(handleNewTechs)}>
                             <Input 
                                 label={'Nome'}
                                 type='text'

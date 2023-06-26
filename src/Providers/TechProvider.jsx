@@ -36,6 +36,31 @@ export const TechProvider = ({ children }) => {
 
     }
 
+    const addSubmit = async (formData) => {
+
+      const token = localStorage.getItem('@KenzieHub:Token')
+      const config = {
+          headers: {
+              Authorization: `Barear ${token}`
+          }
+      }
+
+      try {
+          await api.post('/users/techs', formData, config)
+          await api.get('/profile', config)
+          .then(({ data }) => {
+              setTechs([...data.techs])
+          })
+          toast.success('Tecnologia adicionada') 
+      } catch (error) {
+          toast.error(error)
+      } finally {
+          setHandleModal(false)
+      }
+      
+  }
+
+
     return (
       <TechContext.Provider
         value={{
@@ -44,6 +69,7 @@ export const TechProvider = ({ children }) => {
           technology,
           setTechnology,
           deleteTech,
+          addSubmit,
         }}
       >
         {children}
