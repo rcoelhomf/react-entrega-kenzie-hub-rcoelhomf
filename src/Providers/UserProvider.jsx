@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
         const token = localStorage.getItem('@KenzieHub:Token')
         const config = {
             headers: {
-                Authorization: `Barear ${token}`
+                Authorization: `Baarer ${token}`
             }
         }
 

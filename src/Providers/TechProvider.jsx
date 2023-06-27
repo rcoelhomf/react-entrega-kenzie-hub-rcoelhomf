@@ -1,7 +1,7 @@
-import { createContext, useContext, useState } from 'react';
-import { api } from '../Services/Api';
-import { UserContext } from './UserProvider';
-import { toast } from 'react-toastify';
+import { createContext, useContext, useState } from 'react'
+import { api } from '../Services/Api'
+import { UserContext } from './UserProvider'
+import { toast } from 'react-toastify'
 
 export const TechContext = createContext({})
 
@@ -16,7 +16,7 @@ export const TechProvider = ({ children }) => {
         const token = localStorage.getItem('@KenzieHub:Token')
         const config = {
             headers: {
-                Authorization: `Barear ${token}`
+                Authorization: `Bearer ${token}`
             }
         }
 
