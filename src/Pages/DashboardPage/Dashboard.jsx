@@ -1,7 +1,6 @@
 import logo from '../../assets/Logo.png'
 import { useContext } from 'react'
 import { StyleHeadline, StyleHeadlineBold, StyleTitle1, StyleTitle2, StyleTitle3 } from '../../Styles/Typography'
-import { toast } from 'react-toastify'
 import Puff from 'react-loading-icons/dist/esm/components/puff'
 import { LoadDiv, StyledDiv, StyledHeader, StyledSection } from './style'
 import { UserContext } from '../../Providers/UserProvider'

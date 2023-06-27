@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 
 export const StyledSection = styled.section`
-    width: 100vw;
+    width: 100%;
     height: 80px;
 
     position: fixed;
@@ -50,7 +50,7 @@ export const LoadDiv = styled.div`
 `
 
 export const StyledHeader = styled.header`
-    width: 100vw;
+    width: 100%;
     height: 120px;
     margin-top: 80px;
     padding: 35px 0;
